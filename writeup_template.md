@@ -1,11 +1,5 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
@@ -13,9 +7,6 @@ The goals / steps of this project are the following:
 * Reflect on your work in a written report
 
 
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
 
 ---
 
@@ -23,25 +14,20 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of the below steps. 
+First, I converted the images to hls, then I applied canny function to that image. Then I obtained the quadrilateral region of the lanes and applied hough transform to the resulted image.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+In order to draw a single line on the left and right lanes, I added a filtering function to filter out the line segments obtained from houghLinesP function in draw_lines() function. Lines on the left half of the image with -0.5 to -0.8 were segregated and averaged out to get the lane line on the left. Lines on the right half of the image with 0.5 to 0.8 were segregated and averaged out to get to get the lane line on the right.
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+* The pipeline has not been tested with vehicles at the front of ego vehicle.
+* The pipeline may not be accurate with night time driving videos.
+* The pipeline may not work if there are markings on the road (like stop sign)
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+A possible improvement would be to use hough transform that can follow the road curvature
